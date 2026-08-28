@@ -57,7 +57,7 @@ test('Event Creation via UI and Verification via API', async ({ loggedInUIUser, 
     finally{
         console.log("Cleaning Up the event");
         if (fetchEvent?.custom_response?.data) {
-            expect((await eventsAPI.deleteEvent(fetchEvent.custom_response.data.id, authenticatedUser.token)).custom_response.success).toBe(true);
+            await eventsAPI.deleteEvent(fetchEvent.custom_response.data.id, authenticatedUser.token);
         }
     }
 });

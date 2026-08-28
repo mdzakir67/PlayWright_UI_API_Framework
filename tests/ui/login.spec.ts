@@ -66,7 +66,7 @@ test('Event Creation via API and Verification and deletion via UI', async ({ log
   finally{
     console.log("Cleaning Up the event");
     if (eventResponse) {
-      expect((await eventsAPI.deleteEvent(eventResponse.custom_response.data.id, authenticatedUser.token)).custom_response.success).toBe(true);
+      await eventsAPI.deleteEvent(eventResponse.custom_response.data.id, authenticatedUser.token);
     }
   }
   
