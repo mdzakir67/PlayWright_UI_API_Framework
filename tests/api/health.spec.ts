@@ -14,15 +14,12 @@ test.skip('Register User', async ({ authAPI }) => {
     expect(responseJson.success).toBe(true);
     expect(responseJson.user.id).toBeTruthy();
     expect(responseJson.user.email).toBe(payLoad.email);
-    console.log(responseJson);
 
     let getUserResponseJson = await authAPI.getCurrentUser(responseJson.token);
-    console.log(getUserResponseJson);
 })
 
 test.skip('Register User -2', async ({ authAPI, authenticatedUser }) => {
     let getUserResponseJson = await authAPI.getCurrentUser(authenticatedUser.token);
-    console.log(getUserResponseJson);
 })
 
 test('Event Creation via UI and Verification via API', async ({ loggedInUIUser, request, authenticatedUser }) => {

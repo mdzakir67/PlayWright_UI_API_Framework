@@ -12,7 +12,6 @@ test('Login test - 1',async({page,authenticatedUser})=>{
     await loginPage.login(email,password);
     await expect(loginPage.loginDisplay).toBeVisible();
     await expect(loginPage.loginDisplay).toHaveText(email);
-    console.log(email);
 });
 
 test('Login test -2',async({page,authenticatedUser})=>{
@@ -22,7 +21,6 @@ test('Login test -2',async({page,authenticatedUser})=>{
     await loginPage.login(email,password);
     await expect(loginPage.loginDisplay).toBeVisible();
     await expect(loginPage.loginDisplay).toHaveText(email);
-    console.log(email);
 });
 
 test('Event Creation via API and Verification and deletion via UI', async ({ loggedInUIUser,request, authenticatedUser }) => {
@@ -36,7 +34,6 @@ test('Event Creation via API and Verification and deletion via UI', async ({ log
   expect(eventResponse.custom_response.message).toBeDefined();
   expect(eventResponse.custom_response.message).toBe('Event created successfully');
   expect(eventResponse.custom_response.data).toBeDefined();
-  console.log(eventResponse);
   let eventName = eventResponse.custom_response.data.title;
   await loggedInUIUser.goto('/');  
   await loggedInUIUser.getByTestId('nav-events').click();
