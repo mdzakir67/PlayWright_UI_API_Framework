@@ -17,7 +17,4 @@ jobs:
         run: docker build -t playwright-ui-api-framework:latest .
 
       - name: Run Playwright tests
-        run: docker run --rm \
-          -e UI_BASE_URL=https://eventhub.rahulshettyacademy.com \
-          -e API_BASE_URL=https://api.eventhub.rahulshettyacademy.com/api/ \
-          playwright-ui-api-framework:latest
+        run: docker run --rm -e UI_BASE_URL=https://eventhub.rahulshettyacademy.com -e API_BASE_URL=https://api.eventhub.rahulshettyacademy.com/api/ playwright-ui-api-framework:latest
