@@ -25,7 +25,10 @@ export const CreateEventResponseSchema = z.object({
 export const DeleteEventResponseSchema = z.object({
   success: z.boolean(),
   message: z.string(),
-});
+}).or(z.object({
+  success: z.boolean(),
+  error: z.string(),
+}));
 
 
 export const FetchEventsResponseSchema = z.object({
