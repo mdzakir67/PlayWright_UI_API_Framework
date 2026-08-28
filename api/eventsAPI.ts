@@ -46,6 +46,7 @@ export class EventsAPI {
                 Authorization: `Bearer ${token}`,
             },
         }));
+        console.log(deleteEventResponse);
         return {
             raw_response: deleteEventResponse,
             custom_response: DeleteEventResponseSchema.parse(await deleteEventResponse.json())
