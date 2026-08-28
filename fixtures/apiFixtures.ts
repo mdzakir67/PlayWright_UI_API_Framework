@@ -1,8 +1,8 @@
+import type { Page } from '@playwright/test';
 import { test as base } from '@playwright/test';
 import { AuthAPI } from '../api/authAPI';
-import { generateUser } from '../test-data/user-Data';
-import type { Page } from '@playwright/test';
 import { AuthenticatedUser } from '../api/types/auth.types';
+import { generateUser } from '../test-data/user-Data';
 
 
 
@@ -33,7 +33,6 @@ export const test = base.extend<ApiTestFixtures & UiTestFixtures,ApiWorkerFixtur
     let requestContext = await playwright.request.newContext();
     let authAPI = new AuthAPI(requestContext);
     let registration = await authAPI.registerUser(payLoad)
-
     let authenticatedUser = {
       email: payLoad.email,
       password: payLoad.password,
@@ -62,3 +61,4 @@ export const test = base.extend<ApiTestFixtures & UiTestFixtures,ApiWorkerFixtur
 });
 
 export { expect } from '@playwright/test';
+
