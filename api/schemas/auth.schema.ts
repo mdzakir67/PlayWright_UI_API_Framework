@@ -11,4 +11,4 @@ export const registerResponseSchema = z.object({
     user: userSchema
 })
 
-export type registerResponse = z.infer<typeof registerResponseSchema>;
+export type RegisterUserResponse = z.infer<typeof registerResponseSchema>;

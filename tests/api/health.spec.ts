@@ -1,5 +1,6 @@
 import type { ApiResult } from '../../api/eventsAPI';
 import { EventsAPI } from '../../api/eventsAPI';
+import { RegisterUserResponse } from '../../api/schemas/auth.schema';
 import { FetchEventsResponse } from '../../api/schemas/events.schemas';
 import { expect, test } from '../../fixtures/apiFixtures';
 import { EventsPage } from '../../pages/EventsPage';
@@ -10,12 +11,13 @@ import { expectStatus } from '../../utils/assertions';
 test('Register User', { tag: ['@api', '@smoke'] }, async ({ authAPI }) => {
     let payLoad = generateUser();
 
-    let responseJson = await authAPI.registerUser(payLoad);
-    expect(responseJson.success).toBe(true);
-    expect(responseJson.user.id).toBeTruthy();
-    expect(responseJson.user.email).toBe(payLoad.email);
+    let responseJson:ApiResult<RegisterUserResponse> = await authAPI.registerUser(payLoad);
+    await expect(responseJson.raw_response.status(),'200'),
+    expect(responseJson.custom_response.success).toBe(true);
+    expect(responseJson.custom_response.user.id).toBeTruthy();
+    expect(responseJson.custom_response.user.email).toBe(payLoad.email);
 
-    let getUserResponseJson = await authAPI.getCurrentUser(responseJson.token);
+    let getUserResponseJson = await authAPI.getCurrentUser(responseJson.custom_response.token);
 })
 
 test('Register User -2', { tag: ['@api', '@smoke'] }, async ({ authAPI, authenticatedUser }) => {
