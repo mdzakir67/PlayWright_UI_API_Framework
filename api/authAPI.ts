@@ -12,19 +12,23 @@ export class AuthAPI{
     constructor(private request:APIRequestContext){}
 
     async registerUser(payLoad:authPayLoad):Promise<any>{
-        return await (await this.request.post(this.baseURI+'auth/register',{data:payLoad})).json();
+        let result = await (await this.request.post(this.baseURI+'auth/register',{data:payLoad})).json();
+        console.log(result);
+        return result;
     }
 
     async login(payLoad:authPayLoad){
         return await(await this.request.post(this.baseURI+'auth/login',{data:payLoad})).json();
     }
     async getCurrentUser(token:string){
-        return await (await this.request.get(this.baseURI+'/auth/me',{
+        let result = await (await this.request.get(this.baseURI+'/auth/me',{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
             }
         )).json();
+        console.log(result);
+        return result;
     }
     
 }

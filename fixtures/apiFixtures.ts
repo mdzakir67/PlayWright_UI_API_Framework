@@ -3,6 +3,7 @@ import { test as base } from '@playwright/test';
 import { AuthAPI } from '../api/authAPI';
 import { AuthenticatedUser } from '../api/types/auth.types';
 import { generateUser } from '../test-data/user-Data';
+import { registerResponse } from '../api/schemas/auth.schema';
 
 
 
@@ -32,7 +33,7 @@ export const test = base.extend<ApiTestFixtures & UiTestFixtures,ApiWorkerFixtur
     let payLoad = user;
     let requestContext = await playwright.request.newContext();
     let authAPI = new AuthAPI(requestContext);
-    let registration = await authAPI.registerUser(payLoad)
+    let registration:registerResponse = await authAPI.registerUser(payLoad)
     let authenticatedUser = {
       email: payLoad.email,
       password: payLoad.password,
