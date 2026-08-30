@@ -34,7 +34,7 @@ jobs:
       - name: Select test command
         id: test-command
         run: |
-          case "${{ inputs.test_suite_type }}" in
+            case "${{ inputs.test_suite_type }}" in
             all)
               echo "command=npm test" >> "$GITHUB_OUTPUT"
               ;;
@@ -50,7 +50,10 @@ jobs:
             regression)
               echo "command=npm run test:regression" >> "$GITHUB_OUTPUT"
               ;;
-          esac
+            *)
+              echo "command=npm test" >> "$GITHUB_OUTPUT"
+              ;;
+            esac
 
       - name: Run Playwright tests
         run: docker run --rm -e UI_BASE_URL=https://eventhub.rahulshettyacademy.com -e API_BASE_URL=https://api.eventhub.rahulshettyacademy.com/api/ -v "${{ github.workspace }}/playwright-report:/app/playwright-report" -v "${{ github.workspace }}/test-results:/app/test-results" playwright-ui-api-framework:latest ${{ steps.test-command.outputs.command }}
