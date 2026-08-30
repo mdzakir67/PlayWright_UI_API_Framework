@@ -5,7 +5,7 @@ import { expect, test } from '../../fixtures/apiFixtures';
 import { LoginPage } from '../../pages/LoginPage';
 import { generateEvent } from '../../test-data/user-Data';
 
-test('Login test - 1',async({page,authenticatedUser})=>{
+test('Login test - 1',{ tag: ['@ui', '@smoke'] },async({page,authenticatedUser})=>{
     const {email,password} = authenticatedUser;
     await page.goto('/');
     const loginPage = new LoginPage(page);
@@ -14,7 +14,7 @@ test('Login test - 1',async({page,authenticatedUser})=>{
     await expect(loginPage.loginDisplay).toHaveText(email);
 });
 
-test('Login test -2',async({page,authenticatedUser})=>{
+test('Login test -2', { tag: ['@ui', '@smoke'] },async({page,authenticatedUser})=>{
     const {email,password} = authenticatedUser;
     await page.goto('/');
     const loginPage = new LoginPage(page);
@@ -23,7 +23,7 @@ test('Login test -2',async({page,authenticatedUser})=>{
     await expect(loginPage.loginDisplay).toHaveText(email);
 });
 
-test('Event Creation via API and Verification and deletion via UI', async ({ loggedInUIUser,request, authenticatedUser }) => {
+test('Event Creation via API and Verification and deletion via UI', { tag: ['@ui', '@regression'] }, async ({ loggedInUIUser,request, authenticatedUser }) => {
   console.log('Test A user:', authenticatedUser.email);
   const eventsAPI = new EventsAPI(request);
   let eventResponse: ApiResult<CreateEventResponse> | undefined;

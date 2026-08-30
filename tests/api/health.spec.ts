@@ -7,7 +7,7 @@ import { generateUser } from '../../test-data/user-Data';
 import { expectStatus } from '../../utils/assertions';
 
 
-test.skip('Register User', async ({ authAPI }) => {
+test('Register User', { tag: ['@api', '@smoke'] }, async ({ authAPI }) => {
     let payLoad = generateUser();
 
     let responseJson = await authAPI.registerUser(payLoad);
@@ -18,11 +18,11 @@ test.skip('Register User', async ({ authAPI }) => {
     let getUserResponseJson = await authAPI.getCurrentUser(responseJson.token);
 })
 
-test.skip('Register User -2', async ({ authAPI, authenticatedUser }) => {
+test('Register User -2', { tag: ['@api', '@smoke'] }, async ({ authAPI, authenticatedUser }) => {
     let getUserResponseJson = await authAPI.getCurrentUser(authenticatedUser.token);
 })
 
-test('Event Creation via UI and Verification via API', async ({ loggedInUIUser, request, authenticatedUser }) => {
+test('Event Creation via UI and Verification via API', { tag: ['@api', '@regression'] }, async ({ loggedInUIUser, request, authenticatedUser }) => {
     let eventsAPI = new EventsAPI(request);
     let fetchEvent: ApiResult<FetchEventsResponse> | undefined;
     try {
