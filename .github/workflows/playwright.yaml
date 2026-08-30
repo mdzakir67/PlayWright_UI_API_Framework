@@ -4,18 +4,18 @@ on:
   push:
   pull_request:
   workflow_dispatch:
-  inputs:
-    test_suite_type:
-      description: "Select test suite"
-      required: true
-      default: "all"
-      type: choice
-      options:
-        - all
-        - smoke
-        - api
-        - ui
-        - regression
+    inputs:
+      test_suite_type:
+        description: "Select test suite"
+        required: true
+        default: "all"
+        type: choice
+        options:
+          - all
+          - smoke
+          - api
+          - ui
+          - regression
 
 jobs:
   test:
