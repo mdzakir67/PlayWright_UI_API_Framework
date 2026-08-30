@@ -11,7 +11,7 @@ test('Login test - 1',{ tag: ['@ui', '@smoke'] },async({page,authenticatedUser})
     const loginPage = new LoginPage(page);
     await loginPage.login(email,password);
     await expect(loginPage.loginDisplay).toBeVisible();
-    await expect(loginPage.loginDisplay).toHaveText(email);
+    await expect(loginPage.loginDisplay).toHaveText(email+1);
 });
 
 test('Login test -2', { tag: ['@ui', '@smoke'] },async({page,authenticatedUser})=>{
@@ -20,7 +20,7 @@ test('Login test -2', { tag: ['@ui', '@smoke'] },async({page,authenticatedUser})
     const loginPage = new LoginPage(page);
     await loginPage.login(email,password);
     await expect(loginPage.loginDisplay).toBeVisible();
-    await expect(loginPage.loginDisplay).toHaveText(email);
+    await expect(loginPage.loginDisplay).toHaveText(email+1);
 });
 
 test('Event Creation via API and Verification and deletion via UI', { tag: ['@ui', '@regression'] }, async ({ loggedInUIUser,request, authenticatedUser }) => {
