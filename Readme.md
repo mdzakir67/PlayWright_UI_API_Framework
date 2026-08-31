@@ -1,9 +1,3 @@
-Absolutely. For this project, the README should present it as a **production-style automation framework**, not simply a collection of Playwright tests.
-
-Below is a detailed README tailored to the architecture we've reviewed. You can put this directly into `README.md`.
-
----
-
 # Playwright UI & API Automation Framework
 
 A scalable **Playwright + TypeScript automation framework** for end-to-end UI and REST API testing, with runtime API contract validation using **Zod**, parallel execution using Playwright workers, Docker containerization, Kubernetes Job execution, and GitHub Actions CI.
