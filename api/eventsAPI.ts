@@ -1,20 +1,16 @@
-import { APIRequestContext, APIResponse } from "@playwright/test";
-import { CreateEventPayload} from "./types/events.types";
-import { CreateEventResponseSchema, DeleteEventResponseSchema, FetchEventsResponseSchema, CreateEventResponse, DeleteEventResponse, FetchEventsResponse  } from "./schemas/events.schemas";
-
-
-export type ApiResult<T> = {
-  raw_response: APIResponse;
-  custom_response: T;
-};
+import { APIRequestContext } from "@playwright/test";
+import { config } from "../config/environment";
+import { CreateEventResponse, CreateEventResponseSchema, DeleteEventResponse, DeleteEventResponseSchema, FetchEventsResponse, FetchEventsResponseSchema } from "./schemas/events.schemas";
+import { CreateEventPayload } from "./types/events.types";
+import { ApiResult } from "./types";
 
 export class EventsAPI {
 
-    readonly baseURI = 'https://api.eventhub.rahulshettyacademy.com/api/'
+    readonly baseURI = config.apiBaseURL
     constructor(private request: APIRequestContext) { }
 
     async createEvent(token: string, eventPayload: CreateEventPayload): Promise<ApiResult<CreateEventResponse>> {
-        let eventJsonResponse = await (await this.request.post(this.baseURI + 'events', {
+        const eventJsonResponse = await (await this.request.post(this.baseURI + '/events', {
             data: eventPayload, headers: {
                 Authorization: `Bearer ${token}`,
             }
@@ -27,12 +23,12 @@ export class EventsAPI {
     }
 
     async fetchEvent(queryParams: Map<string, string>, eventId: number, token: string): Promise<ApiResult<FetchEventsResponse>> {
-        let fetchEventResponse = await (await this.request.get(this.baseURI + 'events/' + `${eventId}`, {
+        const fetchEventResponse = await this.request.get(this.baseURI + '/events' + `/${eventId}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
             params: Object.fromEntries(queryParams)
-        }));
+        });
 
         return {
             raw_response: fetchEventResponse,
@@ -41,11 +37,11 @@ export class EventsAPI {
     }
 
     async deleteEvent(eventId: number, token: string): Promise<ApiResult<DeleteEventResponse>> {
-        let deleteEventResponse = await (await this.request.delete(this.baseURI + 'events/' + `${eventId}`, {
+        const deleteEventResponse = await this.request.delete(this.baseURI + '/events' + `/${eventId}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
-        }));
+        });
         return {
             raw_response: deleteEventResponse,
             custom_response: DeleteEventResponseSchema.parse(await deleteEventResponse.json())

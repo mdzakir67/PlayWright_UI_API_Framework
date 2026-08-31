@@ -1,6 +1,6 @@
 import type { ApiResult } from '../../api/eventsAPI';
 import { EventsAPI } from '../../api/eventsAPI';
-import { RegisterUserResponse } from '../../api/schemas/auth.schema';
+import { CurrentLoggedInUserResponse, RegisterUserResponse } from '../../api/schemas/auth.schema';
 import { FetchEventsResponse } from '../../api/schemas/events.schemas';
 import { expect, test } from '../../fixtures/apiFixtures';
 import { EventsPage } from '../../pages/EventsPage';
@@ -17,11 +17,11 @@ test('Register User', { tag: ['@api', '@smoke'] }, async ({ authAPI }) => {
     expect(responseJson.custom_response.user.id).toBeTruthy();
     expect(responseJson.custom_response.user.email).toBe(payLoad.email);
 
-    let getUserResponseJson = await authAPI.getCurrentUser(responseJson.custom_response.token);
+    let getUserResponseJson:ApiResult<CurrentLoggedInUserResponse> = await authAPI.getCurrentUser(responseJson.custom_response.token);
 })
 
 test('Register User -2', { tag: ['@api', '@smoke'] }, async ({ authAPI, authenticatedUser }) => {
-    let getUserResponseJson = await authAPI.getCurrentUser(authenticatedUser.token);
+    let getUserResponseJson:ApiResult<CurrentLoggedInUserResponse> = await authAPI.getCurrentUser(authenticatedUser.token);
 })
 
 test('Event Creation via UI and Verification via API', { tag: ['@api', '@regression'] }, async ({ loggedInUIUser, request, authenticatedUser }) => {

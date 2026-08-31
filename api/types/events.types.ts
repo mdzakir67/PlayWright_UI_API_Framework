@@ -1,4 +1,3 @@
-import { APIResponse } from "@playwright/test";
 
 export interface CreateEventPayload {
   title: string;

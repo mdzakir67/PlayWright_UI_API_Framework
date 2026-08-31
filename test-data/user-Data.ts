@@ -3,8 +3,8 @@ import { CreateUserPayload } from "../api/types/auth.types";
 
 
 export function generateUser(overrides: Partial<CreateUserPayload> = {}): CreateUserPayload {
-    const user = {
-                email: `zakir${Date.now()}.hussain@gmail.com`, //Update number for unique user 
+    const user:CreateUserPayload = {
+                email: `zakir${Date.now()}${Math.floor(Math.random() * 10000)}.hussain@gmail.com`, //Update number for unique user 
                 password: "secret123"
             };
 
